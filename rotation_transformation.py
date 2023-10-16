@@ -276,36 +276,3 @@ def merge_nurbs_patches(content, angles,inital_nurbs_patches):
             node_num =k
             patch_id +=1
     return keywrdNurbs
-
-if __name__ == "__main__":
-    
-    original_file_path = "specimen_tension.k"  # File containing the Single Nurbs Patch, created using Splipy Library
-
-    with open(original_file_path, 'r') as file:
-        content = file.read()
-    
-   # angles = [15.65217391,31.30434782,46.95652173,62.60869564,78.26086955,93.91304346,109.5652174,
-    #          125.2173913,140.8695652,156.5217391,172.173913,187.8260869,203.4782608,219.1304347,
-     #         234.7826087,250.4347826,266.0869565,281.7391304,297.3913043,313.0434782,328.6956521,344.347826]
-        angles= [90,180,270]
-  # List of angles to rotate the original part]  # List of angles to rotate the original part
-    axis_of_rotation = 'y'  # Axis of rotation ('x', 'y', or 'z')
-    inital_nurbs_patches = 2
-
-    # Get the nodes of all patches at different angles
-    original_nodes_data = extract_node_coordinates(content)
-    keywrdNodes = patches_transformed_nodes(original_nodes_data, angles, axis_of_rotation)
-    
-    # Merge all the patches and update connectivity
-    keywrdNurbs = merge_nurbs_patches(content,angles,inital_nurbs_patches)
-
-    # *PART section
-    keywrdPart = "*PART\n\n"
-    keywrdPart += "1".rjust(10) + "0".rjust(10) + "0".rjust(10) + "0".rjust(10) + "0".rjust(10) + "0".rjust(10) + "0".rjust(10) + "0".rjust(10) + '\n'
-
-    # Combine all the data into a single LS-PrePost file format
-    dataDyna = keywrdPart + keywrdNurbs + keywrdNodes + '*END'
-
-    # Write the data into the output file
-    with open('full_specimen.k', 'w') as f:
-        f.write(dataDyna)
