@@ -1,2 +1,2 @@
 # LS-PrePost-Rotation-Transformation
-Python script for rotating LS-PrePost NURBS patches. Extracts node coordinates, performs rotation, and updates connectivity. Ideal for LS-DYNA simulations.
+This Python script facilitates the rotation transformation of NURBS patches in LS-PrePost input files. The script extracts node coordinates, performs rotation around a specified axis, and updates the NURBS patch connectivity. It's particularly useful for simulating rotated structures in LS-DYNA simulations. The script includes functions for extracting node coordinates, transforming nodes, updating node numbers, and merging NURBS patches at different rotation angles.
